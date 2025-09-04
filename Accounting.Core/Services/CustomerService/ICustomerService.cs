@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Accounting.Core.Repositories.GroupInterface
+namespace Accounting.Core.Services.CustomerService
 {
-    public interface IGroupRepository : IGenericRepository<Group>
+    public interface ICustomerService : IService<Customer>
     {
     }
 }
