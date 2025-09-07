@@ -17,5 +17,7 @@ namespace Accounting.Core.Services
         void ChangeStatusAsync(T entity);
 
         Task AddAsync(T entity);
+
+
     }
 }

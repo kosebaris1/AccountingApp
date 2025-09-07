@@ -9,6 +9,6 @@ namespace Accounting.Core.Repositories.CustomerInterface
 {
     public interface ICustomerRepository : IGenericRepository<Customer>
     {
-        List<Customer> GetCustomersWithBalance(int balance);
+       // List<Customer> GetCustomersWithBalance(int balance);
     }
 }

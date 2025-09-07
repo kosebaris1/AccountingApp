@@ -27,6 +27,11 @@ namespace Accounting.Repository.Repositories
 
         }
 
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        {
+            return await _dbSet.AnyAsync(expression);
+        }
+
         public void ChangeStatusAsync(T entity)
         {
             _dbSet.Update(entity);
