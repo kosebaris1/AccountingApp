@@ -32,7 +32,7 @@ namespace Accounting.Repository.Repositories
             return await _dbSet.AnyAsync(expression);
         }
 
-        public void ChangeStatusAsync(T entity)
+        public void ChangeStatus(T entity)
         {
             _dbSet.Update(entity);
         }
@@ -42,7 +42,7 @@ namespace Accounting.Repository.Repositories
            return _dbSet.Count();
         }
 
-        public  IQueryable<T> GetAllAsync()
+        public  IQueryable<T> GetAll()
         {
             return  _dbSet.Where(x=> x.Status == true).AsQueryable();
         }
@@ -52,7 +52,7 @@ namespace Accounting.Repository.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public void UpdateAsync(T entity)
+        public void Update(T entity)
         {
            _dbSet.Update(entity);
         }

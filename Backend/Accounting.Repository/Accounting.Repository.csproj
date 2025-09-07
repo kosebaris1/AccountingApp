@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Accounting.Core\Accounting.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UnitOfWorks\" />
-  </ItemGroup>
-
 </Project>

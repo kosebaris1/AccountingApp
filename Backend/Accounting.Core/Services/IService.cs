@@ -9,12 +9,12 @@ namespace Accounting.Core.Services
 {
     public interface IService<T> where T : class
     {
-        IQueryable<T> GetAllAsync();
+        IQueryable<T> GetAll();
         Task<T> GetByIdAsync(int id);
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
         int Count();
-        void UpdateAsync(T entity);
-        void ChangeStatusAsync(T entity);
+        void Update(T entity);
+        void ChangeStatus(T entity);
 
         Task AddAsync(T entity);
 
