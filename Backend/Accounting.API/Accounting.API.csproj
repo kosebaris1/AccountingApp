@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Accounting.Repository\Accounting.Repository.csproj" />
+    <ProjectReference Include="..\Accounting.Service\Accounting.Service.csproj" />
   </ItemGroup>
 
 </Project>

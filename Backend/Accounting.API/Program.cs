@@ -1,5 +1,7 @@
 
 using Accounting.Repository.Context;
+using Accounting.Service.Mappings;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -19,7 +21,7 @@ namespace Accounting.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddAutoMapper(typeof(MapperProfile));
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
