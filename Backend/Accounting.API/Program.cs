@@ -1,6 +1,9 @@
 
+using Accounting.API.Modules;
 using Accounting.Repository.Context;
 using Accounting.Service.Mappings;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +20,13 @@ namespace Accounting.API
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+            {
+                containerBuilder.RegisterModule(new RepoServiceModule());
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
