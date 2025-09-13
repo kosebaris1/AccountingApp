@@ -1,4 +1,6 @@
 
+using Accounting.API.Filters;
+using Accounting.API.Middlewares;
 using Accounting.API.Modules;
 using Accounting.Repository.Context;
 using Accounting.Service.Mappings;
@@ -31,6 +33,7 @@ namespace Accounting.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped(typeof(NotFoundFilter<>));
             builder.Services.AddAutoMapper(typeof(MapperProfile));
             var app = builder.Build();
 
@@ -42,6 +45,7 @@ namespace Accounting.API
 
             app.UseHttpsRedirection();
 
+            app.UseCustomException();
             app.UseAuthorization();
 
 
