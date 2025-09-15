@@ -11,7 +11,7 @@ namespace Accounting.Service.Mappings
 {
     public class MapperProfile : Profile
     {
-        protected MapperProfile()
+        public MapperProfile()
         {
             CreateMap<Customer, CustomerDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();

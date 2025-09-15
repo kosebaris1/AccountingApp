@@ -46,6 +46,7 @@ namespace Accounting.API
             app.UseHttpsRedirection();
 
             app.UseCustomException();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

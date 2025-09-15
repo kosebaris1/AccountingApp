@@ -22,12 +22,13 @@ namespace Accounting.Service.Services
             _repository = repository;
         }
 
-        public async Task AddAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             entity.CreatedDate = DateTime.Now;
             entity.UpdatedDate = DateTime.Now;
             await _repository.AddAsync(entity);
             await _unitOfWorks.CommitAsync();
+            return entity;
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
