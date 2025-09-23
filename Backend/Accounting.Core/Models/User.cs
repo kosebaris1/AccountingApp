@@ -11,6 +11,8 @@ namespace Accounting.Core.Models
         public string Name { get; set; }
         public int DepartmentId { get; set; }
 
+        public string Email { get; set; }
+
         public Department Department { get; set; }
         public int GroupId { get; set; }
 

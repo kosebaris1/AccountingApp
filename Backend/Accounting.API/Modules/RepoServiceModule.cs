@@ -1,11 +1,13 @@
 ﻿using Accounting.Core.Repositories;
 using Accounting.Core.Services;
+using Accounting.Core.Services.JwtService;
 using Accounting.Core.UnitOfWorks;
 using Accounting.Repository.Context;
 using Accounting.Repository.Repositories;
 using Accounting.Repository.UnitOfWorks;
 using Accounting.Service.Mappings;
 using Accounting.Service.Services;
+using Accounting.Service.Services.JwtService;
 using Autofac;
 using System.Reflection;
 using Module = Autofac.Module;
@@ -25,6 +27,8 @@ namespace Accounting.API.Modules
 
             builder.RegisterType<UnitOfWorks>().As<IUnitOfWorks>();
 
+            builder.RegisterType<TokenHandler>().As<ITokenHandler>();
+
             var apiAssembly = Assembly.GetExecutingAssembly();
             var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext));
             var serviceAssembly = Assembly.GetAssembly(typeof(MapperProfile));
@@ -38,6 +42,7 @@ namespace Accounting.API.Modules
                .Where(x => x.Name.EndsWith("Service"))
                .AsImplementedInterfaces()
                .InstancePerLifetimeScope();
+
 
         }
     }
