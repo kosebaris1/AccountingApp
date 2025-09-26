@@ -16,7 +16,7 @@ namespace Accounting.Service.Hashing
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-        public static bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
+        public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {

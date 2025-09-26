@@ -6,6 +6,8 @@ using Accounting.Core.Services.UserService;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Accounting.Core.DTOs.AuthDTOs;
+using Accounting.Service.Hashing;
 
 namespace Accounting.API.Controllers
 {
@@ -58,6 +60,13 @@ namespace Accounting.API.Controllers
             var processedEntity = _mapper.Map<User>(userDto);
             processedEntity.Createdby = UserId;
             processedEntity.UpdatedBy = UserId;
+
+            byte[] passwordHash, passwordSalt;
+
+            HashingHelper.CreatePassword(userDto.Password, out passwordHash, out passwordSalt);
+
+            processedEntity.PasswordHash = passwordHash;
+            processedEntity.PasswordSalt = passwordSalt;
             var user = await _userService.AddAsync(processedEntity);
 
             var userResponseDto = _mapper.Map<UserDto>(user);
@@ -78,5 +87,19 @@ namespace Accounting.API.Controllers
             _userService.Update(currentUser);
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+        {
+            var token = await _userService.Login(userLoginDto);
+
+            if (token == null)
+            {
+                return CreateActionResult(CustomResponseDto<NoContentDto>.Fail(400, "Email or Password is wrong"));
+            }
+
+            return CreateActionResult(CustomResponseDto<Token>.Success(200, token));
+        }
+
     }
 }

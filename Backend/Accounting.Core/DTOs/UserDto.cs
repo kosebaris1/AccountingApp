@@ -12,11 +12,14 @@ namespace Accounting.Core.DTOs
         public string Name { get; set; }
         public int DepartmentId { get; set; }
 
+        public string Password { get; set; }
         public string Email { get; set; }
-        public DepartmentDto Department { get; set; }
+
         public int GroupId { get; set; }
 
-        public GroupDto Group { get; set; }
+        public DepartmentDto? Department { get; set; }
+
+        public GroupDto? Group { get; set; }
 
    
     }
