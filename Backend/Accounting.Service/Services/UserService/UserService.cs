@@ -27,31 +27,25 @@ namespace Accounting.Service.Services.UserService
 
         public User GetByEmail(string email)
         {
-            User user= _userRepository.Where(x=>x.Email == email).FirstOrDefault();
-
-                return user ?? user;
+            User user = _userRepository.Where(x => x.Email == email).FirstOrDefault();
+            return user;
         }
 
         public async Task<Token> Login(UserLoginDto userLoginDto)
         {
-            Token token = new Token();
+            var user = GetByEmail(userLoginDto.Email);
 
-            var user= GetByEmail(userLoginDto.Email);
-
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
 
-            var result = false;
-
-            result= HashingHelper.VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt);
-
-            List<Role> role = new List<Role>();
+            var result = HashingHelper.VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt);
 
             if (result)
             {
-                token = _tokenHandler.CreateToken(user, role);
+                List<Role> roles = new List<Role>();
+                var token = _tokenHandler.CreateToken(user, roles);
                 return token;
             }
 

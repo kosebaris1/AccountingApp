@@ -6,6 +6,7 @@ using Accounting.Core.Services.GroupService;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Accounting.API.Controllers
 {
@@ -22,6 +23,7 @@ namespace Accounting.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var groups = _groupService.GetAll();

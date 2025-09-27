@@ -29,6 +29,7 @@ namespace Accounting.Service.Services.JwtService
             using RandomNumberGenerator random = RandomNumberGenerator.Create();
             random.GetBytes(number);
             return Convert.ToBase64String(number);
+
         }
 
         public Token CreateToken(User user, List<Role> roles)
@@ -58,7 +59,7 @@ namespace Accounting.Service.Services.JwtService
 
         public IEnumerable<Claim> SetClaims(User user, List<Role> roles)
         {
-            Claim claim=new("Sub", user.Id.ToString());
+            Claim claim = new("Sub", user.Id.ToString());
             List<Claim> claims = new List<Claim>();
             claims.Add(claim);
             claims.AddName(user.Name);

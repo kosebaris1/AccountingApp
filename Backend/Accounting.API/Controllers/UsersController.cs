@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Accounting.Core.DTOs.AuthDTOs;
 using Accounting.Service.Hashing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Accounting.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class UsersController : CustomBaseController
     {
         private readonly IUserService _userService;
@@ -89,6 +92,7 @@ namespace Accounting.API.Controllers
         }
 
         [HttpPost("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
             var token = await _userService.Login(userLoginDto);
