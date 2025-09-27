@@ -65,6 +65,20 @@ namespace Accounting.API.Controllers
             return CreateActionResult(CustomResponseDto<ProductDto>.Success(201, productResponseDto));
         }
 
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> BuyProduct(ProductDto productDto)
+        {
+            // token olmadığı için şuanlık 1 yaptım
+            var UserId = 1;
+            var processedEntity = _mapper.Map<Product>(productDto);
+            processedEntity.Createdby = UserId;
+            processedEntity.UpdatedBy = UserId;
+            await _productService.BuyProduct(processedEntity);
+
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {

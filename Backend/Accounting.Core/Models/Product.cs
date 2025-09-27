@@ -12,6 +12,7 @@ namespace Accounting.Core.Models
 
         public double UnitPrice { get; set; }
 
+        public int Stock { get; set; }
         public ICollection<Sale> Sales { get; set; }    
     }
 }

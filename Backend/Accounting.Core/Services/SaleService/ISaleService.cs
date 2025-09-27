@@ -9,5 +9,6 @@ namespace Accounting.Core.Services.SaleService
 {
     public interface ISaleService : IService<Sale>
     {
+        Task SaleProduct(Sale sale);
     }
 }

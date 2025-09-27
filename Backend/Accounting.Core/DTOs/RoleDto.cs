@@ -10,6 +10,6 @@ namespace Accounting.Core.DTOs
     public class RoleDto : BaseDto
     {
         public string Name { get; set; }
-        public List<GroupInRole> GroupInRoles { get; set; }
+        public List<GroupInRole>? GroupInRoles { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Accounting.Core.DTOs
     {
         public string Name { get; set; }
 
-        public List<Payment> Payments { get; set; }
-        public List<Sale> Sales { get; set; }
+        public List<Payment>? Payments { get; set; }
+        public List<Sale>? Sales { get; set; }
     }
 }
