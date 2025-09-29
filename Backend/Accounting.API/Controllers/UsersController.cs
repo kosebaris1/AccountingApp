@@ -48,7 +48,7 @@ namespace Accounting.API.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> Remove(int id)
         {
-            var UserId = 1; // token olmadığı için şuanlık 1 yaptım
+            var UserId = GetUserFromToken();
             var user = await _userService.GetByIdAsync(id);
             user.UpdatedBy = UserId;
             _userService.ChangeStatus(user);
@@ -58,8 +58,7 @@ namespace Accounting.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(UserDto userDto)
         {
-            // token olmadığı için şuanlık 1 yaptım
-            var UserId = 1;
+            var UserId = GetUserFromToken();
             var processedEntity = _mapper.Map<User>(userDto);
             processedEntity.Createdby = UserId;
             processedEntity.UpdatedBy = UserId;
@@ -80,8 +79,7 @@ namespace Accounting.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
         {
-            // token olmadığı için şuanlık 1 yaptım
-            var UserId = 1;
+            var UserId = GetUserFromToken();
             var currentUser = await _userService.GetByIdAsync(userUpdateDto.Id);
 
             currentUser.UpdatedBy = UserId;

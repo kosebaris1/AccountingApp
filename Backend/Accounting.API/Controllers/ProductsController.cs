@@ -43,7 +43,7 @@ namespace Accounting.API.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> Remove(int id)
         {
-            var UserId = 1; // token olmadığı için şuanlık 1 yaptım
+            var UserId = GetUserFromToken();
             var product = await _productService.GetByIdAsync(id);
             product.UpdatedBy = UserId;
             _productService.ChangeStatus(product);
@@ -53,8 +53,7 @@ namespace Accounting.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
-            // token olmadığı için şuanlık 1 yaptım
-            var UserId = 1;
+            var UserId = GetUserFromToken();
             var processedEntity = _mapper.Map<Product>(productDto);
             processedEntity.Createdby = UserId;
             processedEntity.UpdatedBy = UserId;
@@ -69,8 +68,7 @@ namespace Accounting.API.Controllers
         [HttpPost("[Action]")]
         public async Task<IActionResult> BuyProduct(ProductDto productDto)
         {
-            // token olmadığı için şuanlık 1 yaptım
-            var UserId = 1;
+            var UserId = GetUserFromToken();
             var processedEntity = _mapper.Map<Product>(productDto);
             processedEntity.Createdby = UserId;
             processedEntity.UpdatedBy = UserId;
@@ -82,8 +80,7 @@ namespace Accounting.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {
-            // token olmadığı için şuanlık 1 yaptım
-            var UserId = 1;
+            var UserId = GetUserFromToken();
             var currentProduct = await _productService.GetByIdAsync(productUpdateDto.Id);
 
             currentProduct.UpdatedBy = UserId;
