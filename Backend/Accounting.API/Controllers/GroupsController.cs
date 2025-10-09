@@ -23,7 +23,7 @@ namespace Accounting.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="Root,Root.Groups,Root.Groups.Get")]
         public async Task<IActionResult> GetAll()
         {
             var groups = _groupService.GetAll();
@@ -31,6 +31,7 @@ namespace Accounting.API.Controllers
             return CreateActionResult(CustomResponseDto<List<GroupDto>>.Success(200, dtos));
         }
 
+        [Authorize(Roles = "Root,Root.Groups,Root.Groups.Get")]
         [ServiceFilter(typeof(NotFoundFilter<Group>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -40,7 +41,7 @@ namespace Accounting.API.Controllers
             return CreateActionResult(CustomResponseDto<GroupDto>.Success(200, dto));
         }
 
-
+        [Authorize(Roles = "Root,Root.Groups,Root.Groups.Delete")]
         [ServiceFilter(typeof(NotFoundFilter<Group>))]
         [HttpGet("[action]")]
         public async Task<IActionResult> Remove(int id)
@@ -52,6 +53,7 @@ namespace Accounting.API.Controllers
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
 
+        [Authorize(Roles = "Root,Root.Groups,Root.Groups.Add")]
         [HttpPost]
         public async Task<IActionResult> Save(GroupDto groupDto)
         {

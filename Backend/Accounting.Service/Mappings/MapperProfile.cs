@@ -15,7 +15,6 @@ namespace Accounting.Service.Mappings
         {
             CreateMap<Customer, CustomerDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
-            CreateMap<GroupInRole, GroupInRole  >().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<Group, GroupDto>().ReverseMap();
             CreateMap<Payment, PaymentDto>().ReverseMap();
@@ -23,6 +22,7 @@ namespace Accounting.Service.Mappings
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<Sale, SaleDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<GroupInRole, GroupInRoleDto>().ReverseMap();
         }
     }
 }

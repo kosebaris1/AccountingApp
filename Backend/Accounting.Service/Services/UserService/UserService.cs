@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Accounting.Service.Services.UserService
 {
@@ -27,7 +28,11 @@ namespace Accounting.Service.Services.UserService
 
         public User GetByEmail(string email)
         {
-            User user = _userRepository.Where(x => x.Email == email).FirstOrDefault();
+            User user = _userRepository.Where(x => x.Email == email)
+                .Include(u => u.Group)
+                .ThenInclude(g => g.GroupInRoles)
+                .ThenInclude(x=> x.Role)
+                .FirstOrDefault();
             return user;
         }
 
@@ -42,9 +47,9 @@ namespace Accounting.Service.Services.UserService
 
             var result = HashingHelper.VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt);
 
-            if (result)
+            if (result) 
             {
-                List<Role> roles = new List<Role>();
+                var roles= user.Group.GroupInRoles.Select(x => x.Role).ToList();
                 var token = _tokenHandler.CreateToken(user, roles);
                 return token;
             }
